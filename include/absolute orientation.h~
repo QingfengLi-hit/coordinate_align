@@ -1,0 +1,21 @@
+#include <vector>
+#include <Eigen/Dense>
+#include <string>
+struct PoseDatas
+{
+ double time; 
+ Eigen::Matrix<double,3,1> position;
+};
+class Coordinate_Align
+{
+ public:
+ 
+ void input_datas(const string &keyframe_pose,const string &froundtruth_pose); 
+
+
+ private:
+ PoseDatas pose;
+ vector<PoseDatas> key_dataset;
+ vector<PoseDatas> ground_dataset;
+ vector<PoseDatas> some_ground_dataset;
+};
