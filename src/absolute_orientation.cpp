@@ -19,7 +19,7 @@ using namespace std;
          break;
      key_stream>>key_pose.time>>key_pose.position(0)>>key_pose.position(1)>>key_pose.position(2);
      key_dataset.push_back(key_pose);
-  }
+   }
     ground_stream.open(groundtruth_pose);
     while(!ground_stream.eof())   //acquare groundtruth dataset
    {
@@ -28,7 +28,7 @@ using namespace std;
             break;
         ground_stream>>ground_pose.time>>ground_pose.position(0)>>ground_pose.position(1)>>ground_pose.position(2);
         ground_dataset.push_back(ground_pose);
-  }
+   }
   time_synchronization(key_dataset,ground_dataset);
 
  }
