@@ -29,6 +29,8 @@ using namespace std;
         ground_stream>>ground_pose.time>>ground_pose.position(0)>>ground_pose.position(1)>>ground_pose.position(2);
         ground_dataset.push_back(ground_pose);
    }
+    assert(key_dataset.empty()) ;
+    assert(ground_dataset.empty()) ;
   time_synchronization(key_dataset,ground_dataset);
 
  }
