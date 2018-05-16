@@ -37,10 +37,17 @@ using namespace std;
  /// \param key_dataset
  /// \param ground_dataset
  ///   acquare groundtruth dataset time-synchronization with keyframe dataset
-void  Coordinate_Align::time_synchronization(const vector<PoseDatas> &key_dataset, const vector<PoseDatas> &ground_dataset)
+void  Coordinate_Align::time_synchronization( vector<PoseDatas> &key_dataset,  vector<PoseDatas> &ground_dataset)
 {
+    //the time of the first keyframe must more than the time of the first ground truth
+   while(key_dataset.front().time<=ground_dataset.front().time)
+        key_dataset.erase(key_dataset.begin());
+ //the time of the last keyframe must less than the time of the last ground truth
+   while(key_dataset.back().time>=ground_dataset.back().time)
+        key_dataset.erase(key_dataset.end());
+  assert(key_dataset.empty());
   int j=0;
-  n=key_dataset.size()-8;// duo to my the most time of keyframe dataset more than the most time of groundtruth dataset
+  n=key_dataset.size();// duo to my the most time of keyframe dataset more than the most time of groundtruth dataset
   ofstream f;
   f.open("new_groundtruth.txt");
   f << fixed;
