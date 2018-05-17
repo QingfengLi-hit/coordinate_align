@@ -6,7 +6,7 @@
 #include <Eigen/Eigenvalues>
 
 #include <stdio.h>
-#include <math.h>
+
 #include <limits>
 #include <sys/stat.h>
 using namespace std;

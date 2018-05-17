@@ -2,6 +2,7 @@
 #include <Eigen/Dense>
 #include <Eigen/Geometry>
 #include <string>
+#include "mail.h"
 #include "matrix.h"
 using namespace std;
 struct PoseDatas
