@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall   -O3 -march=native -std=c++11 -O3 -DNDEBUG    CMakeFiles/coordinate_align.dir/src/absolute_orientation.cpp.o CMakeFiles/coordinate_align.dir/src/matrix.cpp.o CMakeFiles/coordinate_align.dir/src/main.cpp.o  -o coordinate_align -rdynamic 

@@ -39,7 +39,7 @@ ${EIGEN3_INCLUDE_DIR}
 
 add_executable(coordinate_align
 src/absolute_orientation.cpp
-src/matrix.cpp
+#src/matrix.cpp
 src/main.cpp)
 target_link_libraries(coordinate_align
 ${EIGEN3_LIBS}
