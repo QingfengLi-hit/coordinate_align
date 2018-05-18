@@ -163,10 +163,16 @@ void Coordinate_Align::compute_p(const double &s,const Eigen::Quaterniond &q,con
 {
     Eigen::Matrix<double,3,1> p;
     double error_x,error_y,error_z,error_ave; //estimate value-true value
-    //Eigen::Matrix<double,3,1> new_keyframe_pose;
+    //create file
+     char * plot_path_dir  =  "plot_path";
+     char * plot_error_dir =  "plot_error";
+     mkdir(plot_path_dir, 0777);
+     mkdir (plot_error_dir, 0777);
+
+//save error and aligned  keyframe pose
     ofstream f,ff;
-    f.open("new_keyframe.txt");
-    ff.open("error.txt");
+    f.open("plot_path/new_keyframe.txt");
+    ff.open("plot_error/error.txt");
     f << fixed;
     ff << fixed;
     p=rr_ave-s*q.toRotationMatrix()*rl_ave;
@@ -190,10 +196,8 @@ void Coordinate_Align::compute_p(const double &s,const Eigen::Quaterniond &q,con
      total_error_ave = error_sum/n;
      ff<<"total average error : "<<total_error_ave<<endl;
      cout<<"total_error_ave = "<<total_error_ave<<endl;
-  plot_trajectory(key_dataset,some_ground_dataset);
-}
-void Coordinate_Align::plot_trajectory(const vector<PoseDatas> &key_dataset, const vector<PoseDatas> &ground_dataset)
-{
+
+     //plot trajectory
     Matrix tmp_pose (3,1);
     vector<Matrix> poses_result, poses_gt;
    for(auto &keyframe_pose: key_dataset)
@@ -203,31 +207,22 @@ void Coordinate_Align::plot_trajectory(const vector<PoseDatas> &key_dataset, con
        tmp_pose.val[2][0] = keyframe_pose.position(2);
        poses_result.push_back(tmp_pose);
    }
-   for(auto &ground_pose: ground_dataset)
+   for(auto &ground_pose: some_ground_dataset)
    {
        tmp_pose.val[0][0] = ground_pose.position(0);
        tmp_pose.val[1][0] = ground_pose.position(1);
        tmp_pose.val[2][0] = ground_pose.position(2);
        poses_gt.push_back(tmp_pose);
    }
-  //create file
-   char * error_dir  = "errors";
-   char * plot_path_dir  =  "plot_path";
-   char * plot_error_dir =  "plot_error";
-   mkdir(error_dir, 0777);
-   mkdir(plot_path_dir, 0777);
-   mkdir (plot_error_dir, 0777);
-   file_name = "00.txt";
-
    // check for errors
    if (poses_gt.size()==0 || poses_result.size()!=poses_gt.size())
    {
      cout<<"poses_gt.size()= "<<poses_gt.size()<<endl;
      cout<<"poses_result.size()= "<<poses_result.size()<<endl;
-     cout<< "ERROR: Could not read (all) poses of:" << file_name << endl;
      return;
    }
    //save trajectory
+   file_name = "00.txt";
    savePathPlot(poses_gt,poses_result, string(plot_path_dir) + "/" + file_name);
    //compute roi
    vector<int32_t> roi = computeRoi(poses_gt,poses_result);

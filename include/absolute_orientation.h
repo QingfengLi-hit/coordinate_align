@@ -25,7 +25,6 @@ class Coordinate_Align
  vector<PoseDatas> temporary_dataset;
  private:
 // PoseDatas pose;
- void plot_trajectory(const vector<PoseDatas> &key_dataset, const vector<PoseDatas> &ground_dataset);
  void savePathPlot (vector<Matrix> &poses_gt,vector<Matrix> &poses_result,string file_name) ;
  vector<int32_t> computeRoi (vector<Matrix> &poses_gt,vector<Matrix> &poses_result);
  void plotPathPlot (string dir,vector<int32_t> &roi,int32_t idx);
